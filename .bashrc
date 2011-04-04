@@ -126,7 +126,7 @@ alias sl='sl -e'
 alias grep='grep --color=auto --exclude-dir=.svn'
 
 export EDITOR="vim"
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$PATH:/sbin:/usr/sbin"
 
 LOCAL_RC='~/.bashrc_local'
 test -f $LOCAL_RC && source $LOCAL_RC
