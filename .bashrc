@@ -97,7 +97,7 @@ function rpass() {
 }
 
 function update_rc() {
-    GIT_URL='https://ipartola@github.com/ipartola/ipartola-bash-and-vim.git'
+    GIT_URL='git://github.com/ipartola/ipartola-bash-and-vim.git'
 
     p=`pwd`
     base="/tmp/`whoami`.envupdate.`rpass 12`"
