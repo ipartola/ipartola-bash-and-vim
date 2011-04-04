@@ -45,8 +45,5 @@ map <C-t> <Esc>:tabnew<CR>
 map <C-l> :tabnext<CR>
 map <C-h> :tabprevious<CR>
 
-set background=dark
-colorscheme solarized
+colorscheme igor
 
-" Colors
-" highlight SpellBad ctermbg=Blue ctermfg=White
