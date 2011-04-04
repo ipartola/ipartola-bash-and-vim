@@ -107,7 +107,11 @@ function update_rc() {
     cd $base/git
     mkdir $base/export
     git archive master | tar -x -C $base/export
-    for x in `ls $base/export`; do
+    for x in `ls -a $base/export`; do
+        [ $x == '.' ] && continue
+        [ $x == '..' ] && continue
+        [ $x == 'README' ] && continue
+        echo installing $x
         cp -r $base/export/$x ~/
     done
     cd $p
