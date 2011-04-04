@@ -96,6 +96,24 @@ function rpass() {
     strings /dev/urandom | grep -o '[[:alnum:]]' | head -n $1 | tr -d '\n'; echo
 }
 
+function update_rc() {
+    GIT_URL='https://ipartola@github.com/ipartola/ipartola-bash-and-vim.git'
+
+    p=`pwd`
+    base="/tmp/`whoami`.envupdate.`rpass 12`"
+    mkdir $base
+    cd $base
+    git clone $GIT_URL $base/git
+    cd $base/git
+    mkdir $base/export
+    git archive master | tar -x -C $base/export
+    for x in `ls $base/export`; do
+        cp -r $base/export/$x ~/
+    done
+    cd $p
+    rm -rf $base
+}
+
 alias vi='vim'
 alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
