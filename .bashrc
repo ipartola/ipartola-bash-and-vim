@@ -97,22 +97,22 @@ function rpass() {
 }
 
 function update_rc() {
-    GIT_URL='git://github.com/ipartola/ipartola-bash-and-vim.git'
+    GIT_URL='https://github.com/ipartola/ipartola-bash-and-vim/tarball/master'
 
     p=`pwd`
     base="/tmp/`whoami`.envupdate.`rpass 12`"
     mkdir $base
     cd $base
-    git clone $GIT_URL $base/git
-    cd $base/git
-    mkdir $base/export
-    git archive master | tar -x -C $base/export
-    for x in `ls -a $base/export`; do
+    wget -q --no-check-certificate -O master.tar.gz $GIT_URL
+    tar xzf master.tar.gz
+    dirname=`tar tf master.tar.gz 2>/dev/null | head -n 1`
+
+    for x in `ls -a $base/$dirname`; do
         [ $x == '.' ] && continue
         [ $x == '..' ] && continue
         [ $x == 'README' ] && continue
         echo installing $x
-        cp -r $base/export/$x ~/
+        cp -r $base/$dirname/$x ~/
     done
     cd $p
     rm -rf $base
