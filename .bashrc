@@ -116,6 +116,7 @@ function update_rc() {
     done
     cd $p
     rm -rf $base
+    source ~/.bashrc
 }
 
 alias vi='vim'
