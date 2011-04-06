@@ -36,9 +36,10 @@ set showcmd
 " shortcuts
 map <Tab> <C-W><C-W>
 
-" Folding
+" Folding - use f to fold/unfold blocks
 map f za
-hi Folded ctermbg=0
+let g:python_fold_comments = 0
+let g:python_fold_docstrings = 0
 
 " Tabs
 map <C-t> <Esc>:tabnew<CR>
