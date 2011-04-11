@@ -23,7 +23,7 @@ hi DiffChange     term=bold ctermbg=5 guibg=LightMagenta
 hi DiffDelete     term=bold cterm=bold ctermfg=4 ctermbg=6 gui=bold guifg=Blue guibg=LightCyan
 hi DiffText       term=reverse cterm=bold ctermbg=1 gui=bold guibg=Red
 hi SignColumn     term=standout ctermfg=4 ctermbg=7 guifg=DarkBlue guibg=Grey
-hi SpellBad       term=reverse ctermbg=1 gui=undercurl guisp=Red
+hi SpellBad       term=reverse ctermbg=1 ctermfg=White gui=undercurl guisp=Red
 hi SpellCap       term=reverse ctermbg=4 gui=undercurl guisp=Blue
 hi SpellRare      term=reverse ctermbg=5 gui=undercurl guisp=Magenta
 hi SpellLocal     term=underline ctermbg=6 gui=undercurl guisp=DarkCyan
