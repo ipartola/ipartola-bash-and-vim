@@ -84,16 +84,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# My modifications
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
-HISTSIZE=100000
-
+# Local functions
 function name() {
 	printf '\033]2;%s\007' "$@";
 }
 
 function rpass() {
-    strings /dev/urandom | grep -o '[[:alnum:]]' | head -n $1 | tr -d '\n'; echo
+    strings /dev/urandom | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
 }
 
 function update_rc() {
@@ -119,6 +116,8 @@ function update_rc() {
     source ~/.bashrc
 }
 
+
+# Some aliases
 alias vi='vim'
 alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
@@ -126,10 +125,16 @@ alias diff='diff -u'
 alias sl='sl -e'
 alias grep='grep --color=auto --exclude-dir=.svn'
 
+# Preferred settings
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
+HISTSIZE=100000
 export EDITOR="vim"
 export PATH="$HOME/.bin:$PATH:/sbin:/usr/sbin"
+bind 'set match-hidden-files off' 
 
+# Include the local rc file
 LOCAL_RC="$HOME/.bashrc_local"
 test -f $LOCAL_RC && source $LOCAL_RC
 
+# Initialization
 name `whoami`@`hostname`
