@@ -93,6 +93,10 @@ function rpass() {
     strings /dev/urandom | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
 }
 
+function mycowsay() {
+    echo "moo"
+}
+
 function update_rc() {
     GIT_URL='https://github.com/ipartola/ipartola-bash-and-vim/tarball/master'
 
