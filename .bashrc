@@ -94,7 +94,7 @@ function rpass() {
 }
 
 function mycowsay() {
-    echo "moo"
+    echo "Moo!"
 }
 
 function update_rc() {
