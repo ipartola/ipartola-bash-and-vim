@@ -90,7 +90,7 @@ function name() {
 }
 
 function rpass() {
-    strings /dev/urandom | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
+    cat /dev/urandom | strings | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
 }
 
 function mycowsay() {
@@ -127,7 +127,7 @@ alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
 alias diff='diff -u'
 alias sl='sl -e'
-alias grep='grep --color=auto --exclude-dir=.svn'
+alias grep='grep --color=auto --exclude=.svn'
 
 # Preferred settings
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
