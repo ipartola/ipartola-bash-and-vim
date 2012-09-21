@@ -40,6 +40,7 @@ map <Tab> <C-W><C-W>
 map f za
 let g:python_fold_comments = 0
 let g:python_fold_docstrings = 0
+set foldnestmax=2
 
 " Tabs
 map <C-t> <Esc>:tabnew<CR>
