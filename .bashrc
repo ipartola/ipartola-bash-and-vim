@@ -84,6 +84,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+umask 0022
+
 # Local functions
 function name() {
 	printf '\033]2;%s\007' "$@";
@@ -93,8 +95,8 @@ function rpass() {
     cat /dev/urandom | strings | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
 }
 
-function mycowsay() {
-    echo "Moo! Moo!"
+function rapass() {
+    cat /dev/urandom | strings | grep -o '[[:alnum:]]' | head -n $1 | tr -d '\n'; echo
 }
 
 function update_rc() {
@@ -127,7 +129,8 @@ alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
 alias diff='diff -u'
 alias sl='sl -e'
-alias grep='grep --color=auto --exclude=.svn'
+alias grep='grep --color=auto --exclude-pattern=.svn'
+alias rehash='source ~/.bashrc'
 
 # Preferred settings
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
