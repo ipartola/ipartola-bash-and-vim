@@ -47,6 +47,10 @@ map <C-t> <Esc>:tabnew<CR>
 map <C-l> :tabnext<CR>
 map <C-h> :tabprevious<CR>
 
+" Backup files
+set backupdir=~/.vim/,.,/tmp
+set directory=~/.vim/,.,/tmp
+
 colorscheme igor
 
 " Transparent editing of gpg encrypted files.

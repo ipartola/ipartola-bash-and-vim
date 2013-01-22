@@ -129,7 +129,7 @@ alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
 alias diff='diff -u'
 alias sl='sl -e'
-alias grep='grep --color=auto --exclude-pattern=.svn'
+alias grep='grep --color=auto --exclude=.svn'
 alias rehash='source ~/.bashrc'
 
 # Preferred settings
