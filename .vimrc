@@ -33,6 +33,9 @@ endi
 set showmode
 set showcmd
 
+" Don't highlight search results
+set nohlsearch
+
 " shortcuts
 map <Tab> <C-W><C-W>
 
