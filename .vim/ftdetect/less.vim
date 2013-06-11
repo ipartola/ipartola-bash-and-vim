@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd BufNewFile,BufRead *.less set filetype=css
