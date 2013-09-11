@@ -122,6 +122,23 @@ function update_rc() {
     source ~/.bashrc
 }
 
+function mydebuild() {
+    dirname=`mktemp -d`
+    curdir=$PWD
+
+    mkdir "$dirname/build"
+    git archive `git rev-parse --abbrev-ref HEAD` > "$dirname/build/src.tar"
+    cd "$dirname/build"
+    tar xf src.tar
+    rm src.tar
+    debuild -us -uc
+    cd ..
+    mv *.deb `dirname "$curdir"`
+    cd $curdir
+    rm -rf "$dirname"
+}
+
+
 
 # Some aliases
 alias vi='vim'
