@@ -103,10 +103,9 @@ function update_rc() {
     GIT_URL='https://github.com/ipartola/ipartola-bash-and-vim/tarball/master'
 
     p=`pwd`
-    base="/tmp/`whoami`.envupdate.`rpass 12`"
-    mkdir $base
+    base=`mktemp -d`
     cd $base
-    wget -q --no-check-certificate -O master.tar.gz $GIT_URL
+    wget -q -O master.tar.gz $GIT_URL
     tar xzf master.tar.gz
     dirname=`tar tf master.tar.gz 2>/dev/null | head -n 1`
 
