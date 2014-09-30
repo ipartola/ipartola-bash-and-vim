@@ -88,23 +88,31 @@ umask 0022
 
 # Local functions
 function name() {
-	printf '\033]2;%s\007' "$@";
+    if [ `uname` == 'Darwin' ]; then
+        printf '\033]0;%s\007' "$@";
+    else
+        printf '\033]2;%s\007' "$@";
+    fi
 }
 
 function rpass() {
+    n=$1
+    [ -z "$n" ] && n="32"
     cat /dev/urandom | strings | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
 }
 
 function rapass() {
+    n=$1
+    [ -z "$n" ] && n="32"
     cat /dev/urandom | strings | grep -o '[[:alnum:]]' | head -n $1 | tr -d '\n'; echo
 }
 
-function update_rc() {
+function update-dotfiles() {
     GIT_URL='https://github.com/ipartola/ipartola-bash-and-vim/tarball/master'
 
     p=`pwd`
-    base=`mktemp -d`
-    cd $base
+    base=`mktemp -d /tmp/dotfilesXXXXXXXX`
+    cd "$base"
     wget -q -O master.tar.gz $GIT_URL
     tar xzf master.tar.gz
     dirname=`tar tf master.tar.gz 2>/dev/null | head -n 1`
@@ -116,28 +124,11 @@ function update_rc() {
         echo installing $x
         cp -r $base/$dirname/$x ~/
     done
+
     cd $p
-    rm -rf $base
+    rm -rf "$base"
     source ~/.bashrc
 }
-
-function mydebuild() {
-    dirname=`mktemp -d`
-    curdir=$PWD
-
-    mkdir "$dirname/build"
-    git archive `git rev-parse --abbrev-ref HEAD` > "$dirname/build/src.tar"
-    cd "$dirname/build"
-    tar xf src.tar
-    rm src.tar
-    debuild -us -uc
-    cd ..
-    mv *.deb `dirname "$curdir"`
-    cd $curdir
-    rm -rf "$dirname"
-}
-
-
 
 # Some aliases
 alias vi='vim'
@@ -145,7 +136,7 @@ alias apt-get="sudo apt-get"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
 alias diff='diff -u'
 alias sl='sl -e'
-alias grep='grep --color=auto --exclude=.svn'
+alias grep='grep --color=auto'
 alias rehash='source ~/.bashrc'
 
 # Preferred settings

@@ -1,0 +1,28 @@
+
+def init():
+    import atexit
+    import os
+    import readline
+    import rlcompleter
+
+    filename = os.path.join(os.getenv('HOME'), '.python_history')
+
+    if not os.path.exists(filename):
+        open(filename, 'w').close()
+
+    history = os.path.expanduser(filename)
+    try:
+        readline.read_history_file(history)
+    except IOError as e:
+        if e.errno != 17:
+            raise
+            
+    if 'libedit' in readline.__doc__:
+        readline.parse_and_bind("bind ^I rl_complete")
+    else:
+        readline.parse_and_bind("tab: complete")
+
+    atexit.register(readline.write_history_file, history)
+
+init()
+del init
