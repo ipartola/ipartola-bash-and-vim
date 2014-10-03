@@ -98,13 +98,23 @@ function name() {
 function rpass() {
     n=$1
     [ -z "$n" ] && n="32"
-    cat /dev/urandom | strings | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $1 | tr -d '\n'; echo
+    pass=`cat /dev/urandom | strings | grep -o '[[:alnum:]\/!@#$%^&*()<>,.,{}]' | head -n $n | tr -d '\n'`
+    if which pbcopy > /dev/null; then
+        echo -n "$pass" | pbcopy
+    fi
+
+    echo "$pass"
 }
 
 function rapass() {
     n=$1
     [ -z "$n" ] && n="32"
-    cat /dev/urandom | strings | grep -o '[[:alnum:]]' | head -n $1 | tr -d '\n'; echo
+    pass=`cat /dev/urandom | strings | grep -o '[[:alnum:]]' | head -n $n | tr -d '\n'`
+    if which pbcopy > /dev/null; then
+        echo -n "$pass" | pbcopy
+    fi
+
+    echo "$pass"
 }
 
 function update-dotfiles() {
