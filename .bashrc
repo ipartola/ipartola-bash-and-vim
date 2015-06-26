@@ -88,11 +88,7 @@ umask 0022
 
 # Local functions
 function name() {
-    if [ `uname` == 'Darwin' ]; then
-        printf '\033]0;%s\007' "$@";
-    else
-        printf '\033]2;%s\007' "$@";
-    fi
+    printf '\033]0;%s\007' "$@";
 }
 
 function rpass() {
