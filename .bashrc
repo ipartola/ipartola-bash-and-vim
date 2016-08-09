@@ -139,6 +139,7 @@ function update-dotfiles() {
 # Some aliases
 alias vi='vim'
 alias apt-get="sudo apt-get"
+alias apt="sudo apt"
 alias sysup="apt-get update && apt-get dist-upgrade && exit"
 alias diff='diff -u'
 alias sl='sl -e'
@@ -150,7 +151,7 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
 HISTSIZE=100000
 export EDITOR="vim"
 export PATH="$HOME/.bin:$PATH:/sbin:/usr/sbin"
-bind 'set match-hidden-files off' 
+bind 'set match-hidden-files off'
 
 # Include the local rc file
 LOCAL_RC="$HOME/.bashrc_local"
