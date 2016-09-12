@@ -134,6 +134,7 @@ function update-dotfiles() {
     cd $p
     rm -rf "$base"
     source ~/.bashrc
+    vim +PluginInstall +qall
 }
 
 # Some aliases

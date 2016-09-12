@@ -54,6 +54,18 @@ map <C-h> :tabprevious<CR>
 set backupdir=~/.vim/,.,/tmp
 set directory=~/.vim/,.,/tmp
 
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Bundle 'scrooloose/syntastic'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'ipartola/igor-vim'
+
+call vundle#end()
+
+
 colorscheme igor
 
 " Transparent editing of gpg encrypted files.
@@ -87,3 +99,9 @@ autocmd BufWritePre,FileWritePre    *.gpg let &sh=shsave
 autocmd BufWritePost,FileWritePost  *.gpg silent u
 autocmd BufWritePost,FileWritePost  *.gpg set nobin
 
+" Syntastic
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_python_checkers = ['python', 'pyflakes']
