@@ -1,3 +1,18 @@
+set nocompatible              " be iMproved, required
+filetype off
+
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ipartola/igor-vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'konfekt/FastFold'
+
+call vundle#end()
+colorscheme igor
+
 set ls=2         " allways show status line
 set ruler        " show the cursor position all the time
 
@@ -7,19 +22,21 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 " Allow backspacing over autoident, joining lines and over start of insert
-set backspace=start,indent,eol 
+set backspace=start,indent,eol
 
 " syntax highlighting and smart indent
 syntax on
+set termguicolors
 set autoindent      " always set autoindenting on
 set smartindent     " smart indent
 set cindent         " cindent
 filetype plugin indent on " Turns on filetype detection, filetype plugins, and
-                          " filetype indenting all of which add nice extra 
+                          " filetype indenting all of which add nice extra
                           " features to whatever language you're using
 
-syntax enable " Turns on filetype detection if not already on, and 
-              " then applies filetype-specific highlighting. 
+
+syntax enable " Turns on filetype detection if not already on, and
+              " then applies filetype-specific highlighting.
 
 if has("autocmd")
     " Restore cursor position
@@ -39,6 +56,13 @@ set nohlsearch
 " shortcuts
 map <Tab> <C-W><C-W>
 
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+:noremap <Leader>w :call TrimWhitespace()<CR>
+
 " Folding - use f to fold/unfold blocks
 map f za
 let g:python_fold_comments = 0
@@ -54,27 +78,20 @@ map <C-h> :tabprevious<CR>
 set backupdir=~/.vim/,.,/tmp
 set directory=~/.vim/,.,/tmp
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+"let g:ale_set_highlights = 1
+"let g:ale_sign_column_always = 1
+"let g:ale_linters = {
+"\   'python': ['python', 'pyflakes'],
+"\}
 
-"Bundle 'scrooloose/syntastic'
-Plugin 'w0rp/ale'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'ipartola/igor-vim'
-
-Plugin 'othree/html5.vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'isRuslan/vim-es6'
-Plugin 'posva/vim-vue'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'kalekundert/vim-coiled-snake'
-
-call vundle#end()
+"let g:ale_lint_on_text_changed = 'always'
+"let g:ale_set_signs = 0
 
 
-colorscheme igor
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes = []
+let g:fastfold_force = 1
+
 
 " Transparent editing of gpg encrypted files.
 augroup encrypted
@@ -107,41 +124,3 @@ autocmd BufWritePre,FileWritePre    *.gpg let &sh=shsave
 autocmd BufWritePost,FileWritePost  *.gpg silent u
 autocmd BufWritePost,FileWritePost  *.gpg set nobin
 
-" Syntastic
-"let g:syntastic_always_populate_loc_list = 0
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 1
-"let g:syntastic_python_checkers = ['python', 'pyflakes']
-
-"let g:ale_set_highlights = 0
-let g:ale_sign_column_always = 1
-
-let g:ale_linters = {
-\   'python': ['python', 'pyflakes'],
-\}
-
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_set_signs = 0
-
-function! g:CoiledSnakeConfigureFold(fold)
-    let a:fold.num_blanks_below = 0
-
-    " Don't fold nested classes.
-    if a:fold.type == 'class'
-        let a:fold.max_level = 1
-
-    " Don't fold nested functions, but do fold methods (i.e. functions
-    " nested inside a class).
-    elseif a:fold.type == 'function'
-        let a:fold.max_level = 1
-        if get(a:fold.parent, 'type') == 'class'
-            let a:fold.max_level = 2
-        endif
-
-    " Only fold imports if there are 3 or more of them.
-    elseif a:fold.type == 'import'
-        let a:fold.min_lines = 2
-    endif
-
-endfunction
